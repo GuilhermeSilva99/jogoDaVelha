@@ -33,15 +33,36 @@ public class Main {
         int coluna = 0;
 
         boolean jogoContinua = true;
+        boolean isLinhaInvalida  = true;
+        boolean isColunaInvalida  = true;
+        String enter = "";
 
         while (jogoContinua){
             imprimir(jogo);
             System.out.println("Jogador da vez: "+jogadorAtual);
-            System.out.println("Digite a linha:");
-            linha = scanner.nextInt();
-            System.out.println("Digite a coluna:");
-            coluna = scanner.nextInt();
+            while(isLinhaInvalida){
+                try {
+                    System.out.println("Digite a linha:");
+                    linha = scanner.nextInt();
+                    isLinhaInvalida = false;
+                }catch (Exception e){
+                    enter = scanner.nextLine();
+                    System.out.println("Digite apenas um número");
+                }
+            }
+            isLinhaInvalida = true;
 
+            while (isColunaInvalida) {
+                try {
+                    System.out.println("Digite a coluna:");
+                    coluna = scanner.nextInt();
+                    isColunaInvalida = false;
+                }catch (Exception e){
+                    enter = scanner.nextLine();
+                    System.out.println("Digite apenas um número");
+                }
+            }
+            isColunaInvalida = true;
             if (verificarJogada(jogo,linha,coluna)){
                 jogo[linha][coluna] = jogadorAtual;
                 if(verificarLinhasCompleta(jogo) || verificarColunasCompleta(jogo) || verificarDiagonaisCompleta(jogo)){

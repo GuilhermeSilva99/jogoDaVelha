@@ -38,11 +38,25 @@ public class Main {
             linha = scanner.nextInt();
             System.out.println("Digite a coluna:");
             coluna = scanner.nextInt();
+
+            if (verificarJogada(jogo,linha,coluna)){
+                System.out.println("jogada valida");
+            }else {
+                System.out.println("Jogada inválida! Jogue novamente!");
+            }
         }
 
 
 
 
+    }
+    public static boolean verificarJogada(Character[][] matriz, int linha, int coluna){
+        if(linha >= 0 && linha <= 2 && coluna >= 0 && coluna <= 2){
+            if(matriz[linha][coluna] == null){
+                return true;
+            }
+        }
+        return  false;
     }
     public static void imprimir(Character[][] matriz){
         System.out.println("#|0|1|2");

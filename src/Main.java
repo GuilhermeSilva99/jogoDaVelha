@@ -19,6 +19,10 @@ public class Main {
      *          
      */
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Character jogador1 = 'O';
+        Character jogador2 = 'X';
+
+        Character[][] jogo = new Character[3][3];
+        
     }
 }

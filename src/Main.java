@@ -44,7 +44,7 @@ public class Main {
 
             if (verificarJogada(jogo,linha,coluna)){
                 jogo[linha][coluna] = jogadorAtual;
-                if(verificarLinhasCompleta(jogo)){
+                if(verificarLinhasCompleta(jogo) || verificarColunasCompleta(jogo)){
                     System.out.println("O jogador "+jogadorAtual+" ganhou o jogo!");
                     imprimir(jogo);
                     jogoContinua = false;
@@ -65,6 +65,23 @@ public class Main {
 
 
 
+    }
+
+    public static boolean verificarColunasCompleta(Character[][] matriz){
+        boolean colunaCompleta = true;
+        for (int i = 0; i < matriz.length; i++) {
+            colunaCompleta = true;
+            for (int j = 1; j < matriz[i].length; j++) {
+                //System.out.println("matriz[0]["+i+"] "+matriz[0][i]+" != matriz["+j+"]["+i+"]  " + matriz[j][i]);
+                if(matriz[0][i] != matriz[j][i] || matriz[0][i] == null){
+                    colunaCompleta = false;
+                }
+            }
+            if(colunaCompleta){
+                break;
+            }
+        }
+        return colunaCompleta;
     }
 
     public static boolean verificarLinhasCompleta(Character[][] matriz){

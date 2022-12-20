@@ -12,10 +12,10 @@ public class Main {
      *          Se está vazio - ok -
      *          Se a posição existe - ok -
      *      ver se o jogo acabou
-     *          Se alguem ganhou
+     *          Se alguem ganhou - ok -
      *              verificar linhas - ok -
-     *              verificar colunas
-     *              verificar diagonais
+     *              verificar colunas - ok -
+     *              verificar diagonais - ok -
      *          Se deu velha
      *      Se não acabou
      *          trocar de jogador
@@ -44,7 +44,7 @@ public class Main {
 
             if (verificarJogada(jogo,linha,coluna)){
                 jogo[linha][coluna] = jogadorAtual;
-                if(verificarLinhasCompleta(jogo) || verificarColunasCompleta(jogo)){
+                if(verificarLinhasCompleta(jogo) || verificarColunasCompleta(jogo) || verificarDiagonaisCompleta(jogo)){
                     System.out.println("O jogador "+jogadorAtual+" ganhou o jogo!");
                     imprimir(jogo);
                     jogoContinua = false;
@@ -66,6 +66,36 @@ public class Main {
 
 
     }
+    public static boolean verificarDiagonaisCompleta(Character[][] matriz){
+        boolean diagonalCompleta = true;
+        for (int i = 1; i < matriz.length; i++) {
+            for (int j = 1; j < matriz.length; j++) {
+                if(i == j){
+                    if(matriz[0][0] != matriz[i][j] || matriz[0][0] == null){
+                        diagonalCompleta = false;
+                    }
+                }
+            }
+        }
+        if(diagonalCompleta){
+            return diagonalCompleta;
+        }
+        diagonalCompleta = true;
+        int contador= 1;
+        for (int i = matriz.length-2; i >= 0; i--) {
+            for (int j = 1; j < matriz.length; j++) {
+                if(contador==j){
+                    if(matriz[matriz.length-1][0] != matriz[i][j] || matriz[matriz.length-1][0] == null){
+                        diagonalCompleta = false;
+                    }
+                }
+            }
+            contador++;
+        }
+        return diagonalCompleta;
+    }
+
+
 
     public static boolean verificarColunasCompleta(Character[][] matriz){
         boolean colunaCompleta = true;

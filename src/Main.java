@@ -16,9 +16,9 @@ public class Main {
      *              verificar linhas - ok -
      *              verificar colunas - ok -
      *              verificar diagonais - ok -
-     *          Se deu velha
-     *      Se não acabou
-     *          trocar de jogador
+     *          Se deu velha - ok -
+     *      Se não acabou - ok -
+     *          trocar de jogador - ok -
      *          
      */
     public static void main(String[] args) {
@@ -48,6 +48,10 @@ public class Main {
                     System.out.println("O jogador "+jogadorAtual+" ganhou o jogo!");
                     imprimir(jogo);
                     jogoContinua = false;
+                }else if(verificarDeuVelha(jogo)){
+                    imprimir(jogo);
+                    System.out.println("O jogo deu velha!");
+                    jogoContinua = false;
                 }else {
                     //trocar jogador
                     if(jogadorAtual == jogador1){
@@ -61,10 +65,18 @@ public class Main {
                 System.out.println("Jogada inválida! Jogue novamente!");
             }
         }
+    }
 
-
-
-
+    public static boolean verificarDeuVelha(Character[][] matriz){
+        boolean deuVelha = true;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if(matriz[i][j] == null){
+                    deuVelha = false;
+                }
+            }
+        }
+        return deuVelha;
     }
     public static boolean verificarDiagonaisCompleta(Character[][] matriz){
         boolean diagonalCompleta = true;

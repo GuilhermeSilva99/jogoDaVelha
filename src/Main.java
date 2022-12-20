@@ -7,13 +7,13 @@ public class Main {
      * Repetir até o jogo acabar
      *      imprimir o jogo - ok -
      *      saber qual jogador da vez - ok -
-     *      ler jogada
-     *      validar a jogada
-     *          Se está vazio
-     *          Se a posição existe
+     *      ler jogada - ok -
+     *      validar a jogada - ok -
+     *          Se está vazio - ok -
+     *          Se a posição existe - ok -
      *      ver se o jogo acabou
      *          Se alguem ganhou
-     *              verificar linhas
+     *              verificar linhas - ok -
      *              verificar colunas
      *              verificar diagonais
      *          Se deu velha
@@ -27,6 +27,7 @@ public class Main {
         Character jogador2 = 'X';
 
         Character[][] jogo = new Character[3][3];
+
         Character jogadorAtual = jogador1;
         int linha = 0;
         int coluna = 0;
@@ -34,13 +35,28 @@ public class Main {
         boolean jogoContinua = true;
 
         while (jogoContinua){
+            imprimir(jogo);
+            System.out.println("Jogador da vez: "+jogadorAtual);
             System.out.println("Digite a linha:");
             linha = scanner.nextInt();
             System.out.println("Digite a coluna:");
             coluna = scanner.nextInt();
 
             if (verificarJogada(jogo,linha,coluna)){
-                System.out.println("jogada valida");
+                jogo[linha][coluna] = jogadorAtual;
+                if(verificarLinhasCompleta(jogo)){
+                    System.out.println("O jogador "+jogadorAtual+" ganhou o jogo!");
+                    imprimir(jogo);
+                    jogoContinua = false;
+                }else {
+                    //trocar jogador
+                    if(jogadorAtual == jogador1){
+                        jogadorAtual = jogador2;
+                    }else {
+                        jogadorAtual = jogador1;
+                    }
+                }
+
             }else {
                 System.out.println("Jogada inválida! Jogue novamente!");
             }
@@ -49,6 +65,23 @@ public class Main {
 
 
 
+    }
+
+    public static boolean verificarLinhasCompleta(Character[][] matriz){
+        boolean linhaCompleta = true;
+        for (int i = 0; i < matriz.length; i++) {
+            linhaCompleta = true;
+            for (int j = 1; j < matriz[i].length; j++) {
+                //System.out.println("matriz["+i+"][0] != matriz["+i+"]["+j+"]  "+matriz[i][j]);
+                if(matriz[i][0] != matriz[i][j] || matriz[i][0] == null){
+                    linhaCompleta = false;
+                }
+            }
+            if(linhaCompleta){
+                break;
+            }
+        }
+        return linhaCompleta;
     }
     public static boolean verificarJogada(Character[][] matriz, int linha, int coluna){
         if(linha >= 0 && linha <= 2 && coluna >= 0 && coluna <= 2){
